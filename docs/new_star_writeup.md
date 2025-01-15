@@ -103,3 +103,25 @@ d=inverse(e,phi)
 print(long_to_bytes(pow(c,d,p*q)))
 ```
 > flag{9cd4b35a-affc-422a-9862-58e1cc3ff8d2}
+
+## misc
+### Labyrinth
+![alt text](pic/yugamu.png)
+> https://aperisolve.com
+
+
+一把梭
+![alt text](pic/image1.png)
+> flag{e33bb7a1-ac94-4d15-8ff7-fd8c88547b43}
+### WhereIsFlag
+![alt text](pic/image.png)
+在proc中找到了
+> flag{nEW5T4R_cTF_20242e2c752e8737}
+
+### pleasingMusic
+根据提示，将其反过来就可以了，然后看音轨，对应morse电码
+> · --·· ··--·- -- --- ·-· ··· · ··--·- -·-· --- -·· ·
+ 
+> EZ_MORSE_CODE
+
+> flag{EZ_MORSE_CODE}
