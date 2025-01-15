@@ -1,3 +1,6 @@
+# before the writeup
+> 题目感谢西电提供的平台，平台链接如下
+[西电训练平台](https://ctf.xidian.edu.cn)
 # week 1
 ## crypto
 ### base
@@ -125,3 +128,43 @@ print(long_to_bytes(pow(c,d,p*q)))
 > EZ_MORSE_CODE
 
 > flag{EZ_MORSE_CODE}
+### 兑换码
+> C:\Program Files\Java\jdk-22\bin>java -jar "C:\Program Files\Stegsolve.jar"
+失败
+修改长宽高试试，得到flag
+![alt text](pic/solve.png)
+> flag{La_vaguelette}
+
+## re
+### Simple_encryption
+![alt text](pic/image2.png)
+非常简单，写个脚本秒了
+```python
+def res(a,i):
+    if(i%3==0):
+        return a+31
+    elif(i%3==1):
+        return a-41
+    elif(i%3==2):
+        return a^0x55
+    else :
+        return 0
+text=[]
+
+buffer=[0x47, 0x95, 0x34, 0x48, 0xA4, 0x1C, 0x35, 0x88, 0x64, 0x16, 0x88, 0x07, 0x14, 0x6A, 0x39, 0x12, 0xA2, 0x0A, 0x37, 0x5C, 0x07, 0x5A, 0x56, 0x60, 0x12, 0x76, 0x25, 0x12, 0x8E, 0x28]
+for i in range (len(buffer)):
+    text.append(res(buffer[i],i))
+
+flag=""
+for i in range(len(text)):
+    flag+=chr((text[i]))
+print(flag)
+```
+> flag{IT_15_R3Al1y_V3Ry-51Mp1e}
+### base64
+![alt text](pic/image3.png)
+换表base64，秒了
+![alt text](pic/image4.png)
+> flag{y0u_kn0w_base64_well}
+
+### 
