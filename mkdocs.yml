@@ -25,3 +25,5 @@ theme:
 nav:
  - 首页: index.md
  - new_star_ctf: new_star_writeup.md
+ - CSA培训: ctf_notebook.md
+  
