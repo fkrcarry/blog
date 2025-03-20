@@ -611,12 +611,60 @@ int main(){
 }
 </code></pre>
 <p>这个题目的点在于，会将小于10的数加到res上，但是又要要求res等于100，此时这里的打法就是可以通过整数溢出。
-char 是1个byte也就是8位
-|1|1|0|0|1|0|0|0|
-|-|-|-|-|-|-|-|-|</p>
-<p>这个数是 -56
-|1|0|0|1|1|1|0|0|
-|-|-|-|-|-|-|-|-|</p>
+char 是1个byte也就是8位</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>这个数是 -56</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>这个数是 -100</p>
 <p>这两个数相加的结果是</p>
 <table>
