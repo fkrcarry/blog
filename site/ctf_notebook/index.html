@@ -376,6 +376,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#string-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      string bug
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -473,6 +482,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      string bug
+    </span>
+  </a>
   
 </li>
       
@@ -586,26 +604,44 @@ int main()
 <h2 id="integer-bug">integer bug</h2>
 <h3 id="sign-detect">sign detect</h3>
 <p>在pwn题中，这是最基础的一种漏洞，但是也是<strong>最容易被忽略</strong>的一种洞（尤其是后面栈溢出打习惯了，第一反应就是找溢出点）。例题如下</p>
+<pre><code class="language-c">#include&lt;stdio.h&gt;
+void get_shell(){
+    system(&quot;/bin/sh&quot;);
+}
+int main(){
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    if(n&gt;=10){
+        exit(0);
+    }else{
+        if(unsigned(n)&gt;=100){
+            puts(&quot;welcome to my shell&quot;);
+            get_shell();
+        }
+    }
+}
+</code></pre>
+<p>这个比较简单，输入一个较大的负数就可以拿shell</p>
 <h3 id="integer-overflow">integer overflow</h3>
 <p>在pwn题中，整数溢出可能会发生在绕过某些检验等地方，例题如下</p>
 <pre><code class="language-C">#include&lt;stdio.h&gt;
-#inlucde&lt;math.h&gt;
+#include&lt;stdlib.h&gt;
 void backdoor(){
     system(&quot;/bin/sh&quot;);
 }
 int main(){
     int n;
     char res=0;
-    scanf(&quot;%d&quot;,&amp;n);
     for(int i = 0; i &lt; 2;i++){
+        scanf(&quot;%d&quot;,&amp;n);
         if ( n &gt;= 10 ) {
-            exit(0);
+            return 0;
         } else {
             res+=n;
         }
     }
-
     if(res == 100){
+        puts(&quot;welcome to my shell&quot;);
         backdoor();
     }
 }
@@ -693,7 +729,38 @@ char 是1个byte也就是8位</p>
 </tr>
 </tbody>
 </table>
-<p>也就是100，达到要求拿到shell</p>
+<p>也就是100，达到要求,拿到shell</p>
+<h2 id="string-bug">string bug</h2>
+<p>我们在c语言中学习过，c语言中字符串长度是没有限制的，字符串的结束是以 ascii码为0的字符表示的，即"\x00",所以没有\x00时，计算机在读不到"\x00"时会一直读下去，导致泄露一些东西
+例题如下</p>
+<pre><code class="language-c">#include&lt;stdio.h&gt;
+#include&lt;random&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+void init(){
+    setvbuf(stdout, 0LL, 2, 0LL);
+    setvbuf(stdin, 0LL, 2, 0LL);
+    setvbuf(stderr, 0LL, 2, 0LL);
+}
+void get_shell(){
+    system(&quot;/bin/sh&quot;);
+}
+int main(){
+    init();
+    char a[4] ;
+    int b;
+    b=rand();
+    puts(&quot;plz input a&quot;);
+    read(0,a,10);
+    puts(a);
+    puts(&quot;you can guess what b is , if you are correct , I will give you a shell&quot;);
+    scanf(&quot;%d&quot;,&amp;guess);
+    if(guess==b){
+        puts(&quot;welcome_to_my_shell&quot;);
+        get_shell();
+    }
+}
+</code></pre>
 
 
 

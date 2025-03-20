@@ -26,4 +26,48 @@ nav:
  - 首页: index.md
  - new_star_ctf: new_star_writeup.md
  - CSA培训: ctf_notebook.md
-  
+markdown_extensions:
+  # - meta # Sponsors only
+  - toc:
+      permalink: true
+      toc_depth: 5
+  - def_list
+  - attr_list
+  - md_in_html
+  - sane_lists
+  - admonition
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.snippets
+  # - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+            # validation:
+            #   nav:
+            #     omitted_files: info
+            #     not_found: warn
+            #     absolute_links: info
+            #   links:
+            #     not_found: ignore
+            #     absolute_links: ignore
+            #     unrecognized_links: ignore
+            # extra begin
+
