@@ -323,17 +323,17 @@
                   
 
 
-<h1 id="before-the-writeup">before the writeup</h1>
+<h1 id="before-the-writeup">before the writeup<a class="headerlink" href="#before-the-writeup" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>题目感谢西电提供的平台，平台链接如下
 <a href="https://ctf.xidian.edu.cn">西电训练平台</a></p>
 </blockquote>
-<h1 id="week-1">week 1</h1>
-<h2 id="crypto">crypto</h2>
-<h3 id="base">base</h3>
-<pre><code>4C4A575851324332474E324547554B494A5A4446513653434E564D444154545A4B354D45454D434E4959345536544B474D5134513D3D3D3D
-</code></pre>
-<p>base32-&gt;</p>
+<h1 id="week-1">week 1<a class="headerlink" href="#week-1" title="Permanent link">&para;</a></h1>
+<h2 id="crypto">crypto<a class="headerlink" href="#crypto" title="Permanent link">&para;</a></h2>
+<h3 id="base">base<a class="headerlink" href="#base" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>4C4A575851324332474E324547554B494A5A4446513653434E564D444154545A4B354D45454D434E4959345536544B474D5134513D3D3D3D
+</code></pre></div>
+base32-&gt;</p>
 <blockquote>
 <p>ZmxhZ3tCQHNFXzBmX0NyWXB0MF9OMFd9</p>
 </blockquote>
@@ -341,104 +341,102 @@
 <blockquote>
 <p>flag{B@sE_0f_CrYpt0_N0W}</p>
 </blockquote>
-<h3 id="strange-king">Strange King</h3>
+<h3 id="strange-king">Strange King<a class="headerlink" href="#strange-king" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>ksjr{EcxvpdErSvcDgdgEzxqjql}
-刚开始试的凯撒，发现找不到，仔细观察发现ksjr和flag的偏移量是5 7 9 11 ，于是猜测后续就是13 15这样，于是写个脚本，注意mod 26</p>
+刚开始试的凯撒，发现找不到，仔细观察发现ksjr和flag的偏移量是5 7 9 11 ，于是猜测后续就是13 15这样，于是写个脚本，注意mod 26
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">dec</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">li</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">if</span><span class="p">(</span><span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="s1">&#39;a&#39;</span><span class="ow">and</span> <span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">&#39;z&#39;</span><span class="p">):</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="k">return</span> <span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="p">((</span><span class="o">-</span><span class="n">li</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="mi">26</span><span class="p">)</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span><span class="o">%</span><span class="mi">26</span><span class="o">+</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">elif</span><span class="p">(</span><span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="s1">&#39;A&#39;</span><span class="ow">and</span> <span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">&#39;Z&#39;</span><span class="p">):</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="k">return</span> <span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="p">((</span><span class="o">-</span><span class="n">li</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="mi">26</span><span class="p">)</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span><span class="o">%</span><span class="mi">26</span><span class="o">+</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">else</span> <span class="p">:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="k">return</span> <span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">cipher</span><span class="o">=</span><span class="s2">&quot;ksjr</span><span class="si">{EcxvpdErSvcDgdgEzxqjql}</span><span class="s2">&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># print(ord(&#39;k&#39;)-ord(&#39;f&#39;))</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># print(ord(&#39;s&#39;)-ord(&#39;l&#39;))</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># print(ord(&#39;j&#39;)-ord(&#39;a&#39;))</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># print(ord(&#39;r&#39;)-ord(&#39;g&#39;))</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># print(chr(ord(&#39;E&#39;)+((-15)%26)))</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">li</span><span class="o">=</span><span class="p">[]</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">IV</span><span class="o">=</span><span class="mi">5</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cipher</span><span class="p">)):</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">li</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">IV</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">IV</span><span class="o">+=</span><span class="mi">2</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">flag</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cipher</span><span class="p">)):</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="n">flag</span><span class="o">+=</span><span class="n">dec</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">li</span><span class="p">)</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></div>
+flag{PleaseDoNotStopLearing}</p>
 </blockquote>
-<pre><code class="language-python">def dec(cipher,i,li):
-    if(cipher[i]&gt;='a'and cipher[i]&lt;='z'):
-        return chr((ord(cipher[i])+((-li[i])%26)-ord('a'))%26+ord('a'))
-    elif(cipher[i]&gt;='A'and cipher[i]&lt;='Z'):
-        return chr((ord(cipher[i])+((-li[i])%26)-ord('A'))%26+ord('A'))
-    else :
-        return cipher[i]
-cipher=&quot;ksjr{EcxvpdErSvcDgdgEzxqjql}&quot;
-# print(ord('k')-ord('f'))
-# print(ord('s')-ord('l'))
-# print(ord('j')-ord('a'))
-# print(ord('r')-ord('g'))
-# print(chr(ord('E')+((-15)%26)))
-li=[]
-IV=5
-for i in range(len(cipher)):
-    li.append(IV)
-    IV+=2
-flag=&quot;&quot;
-for i in range(len(cipher)):
-    flag+=dec(cipher,i,li)
-print(flag)
-</code></pre>
-<blockquote>
-<p>flag{PleaseDoNotStopLearing}</p>
-</blockquote>
-<h3 id="xor">xor</h3>
-<p>题目</p>
-<pre><code class="language-python">#As a freshman starting in 2024, you should know something about XOR, so this task is for you to sign in.
-
-from pwn import xor
-#The Python pwntools library has a convenient xor() function that can XOR together data of different types and lengths
-from Crypto.Util.number import *
-
-key = b'New_Star_CTF'
-flag='flag{*******************}'
-
-m1 = bytes_to_long(bytes(flag[:13], encoding='utf-8'))
-m2 = flag[13:]
-
-c1 = m1 ^ bytes_to_long(key)
-c2 = xor(key, m2)
-print('c1=',c1)
-print('c2=',c2)
-# c1= 8091799978721254458294926060841
-# c2= b';:\x1c1&lt;\x03&gt;*\x10\x11u;'
-</code></pre>
-<p>脚本</p>
-<pre><code class="language-python">c1= 8091799978721254458294926060841
-c2= b';:\x1c1&lt;\x03&gt;*\x10\x11u;'
-
-m1=c1^bytes_to_long(key)
-m2=xor(key,c2)
-print(long_to_bytes(m1))
-print(m2)
-print(long_to_bytes(m1).decode()+m2.decode())
-</code></pre>
+<h3 id="xor">xor<a class="headerlink" href="#xor" title="Permanent link">&para;</a></h3>
+<p>题目
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">#As a freshman starting in 2024, you should know something about XOR, so this task is for you to sign in.</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="n">xor</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">#The Python pwntools library has a convenient xor() function that can XOR together data of different types and lengths</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;New_Star_CTF&#39;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">flag</span><span class="o">=</span><span class="s1">&#39;flag{*******************}&#39;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">m1</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">flag</span><span class="p">[:</span><span class="mi">13</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">m2</span> <span class="o">=</span> <span class="n">flag</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">c1</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">^</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">c2</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;c1=&#39;</span><span class="p">,</span><span class="n">c1</span><span class="p">)</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;c2=&#39;</span><span class="p">,</span><span class="n">c2</span><span class="p">)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># c1= 8091799978721254458294926060841</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># c2= b&#39;;:\x1c1&lt;\x03&gt;*\x10\x11u;&#39;</span>
+</code></pre></div>
+脚本
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">c1</span><span class="o">=</span> <span class="mi">8091799978721254458294926060841</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">c2</span><span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;;:</span><span class="se">\x1c</span><span class="s1">1&lt;</span><span class="se">\x03</span><span class="s1">&gt;*</span><span class="se">\x10\x11</span><span class="s1">u;&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">m1</span><span class="o">=</span><span class="n">c1</span><span class="o">^</span><span class="n">bytes_to_long</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">m2</span><span class="o">=</span><span class="n">xor</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">c2</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">m1</span><span class="p">))</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">+</span><span class="n">m2</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</code></pre></div></p>
 <blockquote>
 <p>flag{0ops!_you_know_XOR!}</p>
 </blockquote>
-<h3 id="_1">一眼秒了</h3>
-<pre><code class="language-python">from Crypto.Util.number import *
-from gmpy2 import *
-from serct import flag
-p = getPrime(512)
-q = getPrime(512)
-n = p*q
-m = bytes_to_long(flag)
-e = 65537
-c = powmod(m, e, n)
-print(n)
-print(c)
-
-from Crypto.Util.number import *
-# 52147017298260357180329101776864095134806848020663558064141648200366079331962132411967917697877875277103045755972006084078559453777291403087575061382674872573336431876500128247133861957730154418461680506403680189755399752882558438393107151815794295272358955300914752523377417192504702798450787430403387076153
-#c=48757373363225981717076130816529380470563968650367175499612268073517990636849798038662283440350470812898424299904371831068541394247432423751879457624606194334196130444478878533092854342610288522236409554286954091860638388043037601371807379269588474814290382239910358697485110591812060488786552463208464541069
-</code></pre>
-<p>扔进factordb中秒了分解，然后套公式</p>
-<pre><code class="language-python">from Crypto.Util.number import *
-# 52147017298260357180329101776864095134806848020663558064141648200366079331962132411967917697877875277103045755972006084078559453777291403087575061382674872573336431876500128247133861957730154418461680506403680189755399752882558438393107151815794295272358955300914752523377417192504702798450787430403387076153
-c=48757373363225981717076130816529380470563968650367175499612268073517990636849798038662283440350470812898424299904371831068541394247432423751879457624606194334196130444478878533092854342610288522236409554286954091860638388043037601371807379269588474814290382239910358697485110591812060488786552463208464541069
-p=7221289171488727827673517139597844534869368289455419695964957239047692699919030405800116133805855968123601433247022090070114331842771417566928809956044421
-q=7221289171488727827673517139597844534869368289455419695964957239047692699919030405800116133805855968123601433247022090070114331842771417566928809956045093
-e=0x10001
-phi=(p-1)*(q-1)
-d=inverse(e,phi)
-print(long_to_bytes(pow(c,d,p*q)))
-</code></pre>
+<h3 id="_1">一眼秒了<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">gmpy2</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span> <span class="nn">serct</span> <span class="kn">import</span> <span class="n">flag</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">q</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="n">q</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">m</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">e</span> <span class="o">=</span> <span class="mi">65537</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">c</span> <span class="o">=</span> <span class="n">powmod</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># 52147017298260357180329101776864095134806848020663558064141648200366079331962132411967917697877875277103045755972006084078559453777291403087575061382674872573336431876500128247133861957730154418461680506403680189755399752882558438393107151815794295272358955300914752523377417192504702798450787430403387076153</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1">#c=48757373363225981717076130816529380470563968650367175499612268073517990636849798038662283440350470812898424299904371831068541394247432423751879457624606194334196130444478878533092854342610288522236409554286954091860638388043037601371807379269588474814290382239910358697485110591812060488786552463208464541069</span>
+</code></pre></div>
+扔进factordb中秒了分解，然后套公式
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># 52147017298260357180329101776864095134806848020663558064141648200366079331962132411967917697877875277103045755972006084078559453777291403087575061382674872573336431876500128247133861957730154418461680506403680189755399752882558438393107151815794295272358955300914752523377417192504702798450787430403387076153</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">c</span><span class="o">=</span><span class="mi">48757373363225981717076130816529380470563968650367175499612268073517990636849798038662283440350470812898424299904371831068541394247432423751879457624606194334196130444478878533092854342610288522236409554286954091860638388043037601371807379269588474814290382239910358697485110591812060488786552463208464541069</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">p</span><span class="o">=</span><span class="mi">7221289171488727827673517139597844534869368289455419695964957239047692699919030405800116133805855968123601433247022090070114331842771417566928809956044421</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">q</span><span class="o">=</span><span class="mi">7221289171488727827673517139597844534869368289455419695964957239047692699919030405800116133805855968123601433247022090070114331842771417566928809956045093</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">e</span><span class="o">=</span><span class="mh">0x10001</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">phi</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">d</span><span class="o">=</span><span class="n">inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">phi</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">p</span><span class="o">*</span><span class="n">q</span><span class="p">)))</span>
+</code></pre></div></p>
 <blockquote>
 <p>flag{9cd4b35a-affc-422a-9862-58e1cc3ff8d2}</p>
 </blockquote>
-<h2 id="misc">misc</h2>
-<h3 id="labyrinth">Labyrinth</h3>
+<h2 id="misc">misc<a class="headerlink" href="#misc" title="Permanent link">&para;</a></h2>
+<h3 id="labyrinth">Labyrinth<a class="headerlink" href="#labyrinth" title="Permanent link">&para;</a></h3>
 <p><img alt="alt text" src="../pic/yugamu.png" /></p>
 <blockquote>
 <p>https://aperisolve.com</p>
@@ -448,20 +446,20 @@ print(long_to_bytes(pow(c,d,p*q)))
 <blockquote>
 <p>flag{e33bb7a1-ac94-4d15-8ff7-fd8c88547b43}</p>
 </blockquote>
-<h3 id="whereisflag">WhereIsFlag</h3>
+<h3 id="whereisflag">WhereIsFlag<a class="headerlink" href="#whereisflag" title="Permanent link">&para;</a></h3>
 <p><img alt="alt text" src="../pic/image.png" />
 在proc中找到了</p>
 <blockquote>
 <p>flag{nEW5T4R_cTF_20242e2c752e8737}</p>
 </blockquote>
-<h3 id="pleasingmusic">pleasingMusic</h3>
+<h3 id="pleasingmusic">pleasingMusic<a class="headerlink" href="#pleasingmusic" title="Permanent link">&para;</a></h3>
 <p>根据提示，将其反过来就可以了，然后看音轨，对应morse电码</p>
 <blockquote>
 <p>· --·· ··--·- -- --- ·-· ··· · ··--·- -·-· --- -·· ·</p>
 <p>EZ_MORSE_CODE</p>
 <p>flag{EZ_MORSE_CODE}</p>
 </blockquote>
-<h3 id="_2">兑换码</h3>
+<h3 id="_2">兑换码<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>C:\Program Files\Java\jdk-22\bin&gt;java -jar "C:\Program Files\Stegsolve.jar"
 失败
@@ -469,60 +467,59 @@ print(long_to_bytes(pow(c,d,p*q)))
 <img alt="alt text" src="../pic/solve.png" />
 flag{La_vaguelette}</p>
 </blockquote>
-<h2 id="re">re</h2>
-<h3 id="simple_encryption">Simple_encryption</h3>
+<h2 id="re">re<a class="headerlink" href="#re" title="Permanent link">&para;</a></h2>
+<h3 id="simple_encryption">Simple_encryption<a class="headerlink" href="#simple_encryption" title="Permanent link">&para;</a></h3>
 <p><img alt="alt text" src="../pic/image2.png" />
-非常简单，写个脚本秒了</p>
-<pre><code class="language-python">def res(a,i):
-    if(i%3==0):
-        return a+31
-    elif(i%3==1):
-        return a-41
-    elif(i%3==2):
-        return a^0x55
-    else :
-        return 0
-text=[]
-
-buffer=[0x47, 0x95, 0x34, 0x48, 0xA4, 0x1C, 0x35, 0x88, 0x64, 0x16, 0x88, 0x07, 0x14, 0x6A, 0x39, 0x12, 0xA2, 0x0A, 0x37, 0x5C, 0x07, 0x5A, 0x56, 0x60, 0x12, 0x76, 0x25, 0x12, 0x8E, 0x28]
-for i in range (len(buffer)):
-    text.append(res(buffer[i],i))
-
-flag=&quot;&quot;
-for i in range(len(text)):
-    flag+=chr((text[i]))
-print(flag)
-</code></pre>
+非常简单，写个脚本秒了
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">res</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="mi">31</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">elif</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="k">return</span> <span class="n">a</span><span class="o">-</span><span class="mi">41</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">elif</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="k">return</span> <span class="n">a</span><span class="o">^</span><span class="mh">0x55</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">else</span> <span class="p">:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">text</span><span class="o">=</span><span class="p">[]</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">buffer</span><span class="o">=</span><span class="p">[</span><span class="mh">0x47</span><span class="p">,</span> <span class="mh">0x95</span><span class="p">,</span> <span class="mh">0x34</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0xA4</span><span class="p">,</span> <span class="mh">0x1C</span><span class="p">,</span> <span class="mh">0x35</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x6A</span><span class="p">,</span> <span class="mh">0x39</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0xA2</span><span class="p">,</span> <span class="mh">0x0A</span><span class="p">,</span> <span class="mh">0x37</span><span class="p">,</span> <span class="mh">0x5C</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0x5A</span><span class="p">,</span> <span class="mh">0x56</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x76</span><span class="p">,</span> <span class="mh">0x25</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x8E</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">]</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)):</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">i</span><span class="p">))</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">flag</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)):</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="n">flag</span><span class="o">+=</span><span class="nb">chr</span><span class="p">((</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></div></p>
 <blockquote>
 <p>flag{IT_15_R3Al1y_V3Ry-51Mp1e}</p>
 </blockquote>
-<h3 id="base64">base64</h3>
+<h3 id="base64">base64<a class="headerlink" href="#base64" title="Permanent link">&para;</a></h3>
 <p><img alt="alt text" src="../pic/image3.png" />
 换表base64，秒了
 <img alt="alt text" src="../pic/image4.png" /></p>
 <blockquote>
 <p>flag{y0u_kn0w_base64_well}</p>
 </blockquote>
-<h3 id="begin">begin</h3>
+<h3 id="begin">begin<a class="headerlink" href="#begin" title="Permanent link">&para;</a></h3>
 <p>非常好的题目，教人如何用IDA
 告诉我们 shift+F12可以查看string，而变量或者函数加x可以看到引用</p>
 <blockquote>
 <p>flag{Mak3_aN_3Ff0rt_tO_5eArcH_F0r_th3_f14g_C0Rpse}</p>
 </blockquote>
-<h2 id="pwn">pwn</h2>
-<h3 id="game">game</h3>
-<p>源代码的意思是每次输入一个个位数，五秒内输到大于999即可，exp如下</p>
-<pre><code class="language-python">from pwn import *
-p=remote('127.0.0.1',45393)
-#p=process(&quot;./pwn&quot;)
-context.log_level='DEBUG'
-for i in range(112):
-
-    p.sendline(b&quot;9&quot;)
-p.interactive()
-
-</code></pre>
-<h3 id="real-login">real login</h3>
+<h2 id="pwn">pwn<a class="headerlink" href="#pwn" title="Permanent link">&para;</a></h2>
+<h3 id="game">game<a class="headerlink" href="#game" title="Permanent link">&para;</a></h3>
+<p>源代码的意思是每次输入一个个位数，五秒内输到大于999即可，exp如下
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">p</span><span class="o">=</span><span class="n">remote</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="mi">45393</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">#p=process(&quot;./pwn&quot;)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">context</span><span class="o">.</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;DEBUG&#39;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">112</span><span class="p">):</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;9&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></p>
+<h3 id="real-login">real login<a class="headerlink" href="#real-login" title="Permanent link">&para;</a></h3>
 <p>真的是签到，输入NewStar!!!就可以拿shell</p>
 
 
