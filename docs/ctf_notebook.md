@@ -54,27 +54,46 @@ int main()
 ## integer bug
 ### sign detect
 在pwn题中，这是最基础的一种漏洞，但是也是**最容易被忽略**的一种洞（尤其是后面栈溢出打习惯了，第一反应就是找溢出点）。例题如下
+```c
+#include<stdio.h>
+void get_shell(){
+    system("/bin/sh");
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    if(n>=10){
+        exit(0);
+    }else{
+        if(unsigned(n)>=100){
+            puts("welcome to my shell");
+            get_shell();
+        }
+    }
+}
+```
+这个比较简单，输入一个较大的负数就可以拿shell
 ### integer overflow
 在pwn题中，整数溢出可能会发生在绕过某些检验等地方，例题如下
 ```C
 #include<stdio.h>
-#inlucde<math.h>
+#include<stdlib.h>
 void backdoor(){
     system("/bin/sh");
 }
 int main(){
     int n;
     char res=0;
-    scanf("%d",&n);
     for(int i = 0; i < 2;i++){
+        scanf("%d",&n);
         if ( n >= 10 ) {
-            exit(0);
+            return 0;
         } else {
             res+=n;
         }
     }
-    
     if(res == 100){
+        puts("welcome to my shell");
         backdoor();
     }
 }
@@ -97,4 +116,37 @@ char 是1个byte也就是8位
 |0|1|1|0|0|1|0|0|
 |-|-|-|-|-|-|-|-|
 
-也就是100，达到要求拿到shell
+也就是100，达到要求,拿到shell
+
+## string bug
+我们在c语言中学习过，c语言中字符串长度是没有限制的，字符串的结束是以 ascii码为0的字符表示的，即"\x00",所以没有\x00时，计算机在读不到"\x00"时会一直读下去，导致泄露一些东西
+例题如下
+```c
+#include<stdio.h>
+#include<random>
+#include<unistd.h>
+#include<stdlib.h>
+void init(){
+    setvbuf(stdout, 0LL, 2, 0LL);
+    setvbuf(stdin, 0LL, 2, 0LL);
+    setvbuf(stderr, 0LL, 2, 0LL);
+}
+void get_shell(){
+    system("/bin/sh");
+}
+int main(){
+    init();
+    char a[4] ;
+    int b;
+    b=rand();
+    puts("plz input a");
+    read(0,a,10);
+    puts(a);
+    puts("you can guess what b is , if you are correct , I will give you a shell");
+    scanf("%d",&guess);
+    if(guess==b){
+        puts("welcome_to_my_shell");
+        get_shell();
+    }
+}
+```
