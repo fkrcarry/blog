@@ -24,6 +24,7 @@ theme:
         name: Switch to light mode
 nav:
  - 首页: index.md
+ - 学业笔记: note.md
  - new_star_ctf: new_star_writeup.md
  - CSA培训: ctf_notebook.md
 markdown_extensions:
