@@ -709,7 +709,8 @@ line  CODE  JT   JF      K
  0007: 0x15 0x01 0x00 0x00000142  if (A == execveat) goto 0009
  0008: 0x06 0x00 0x00 0x7fff0000  return ALLOW
  0009: 0x06 0x00 0x00 0x00000000  return KILL
- ```
+```
+
 这里malloc超界，本来想着没有free怎么劫持啊，调试发现seccomp开沙箱会让bin里面有一大堆块，于是任意malloc，利用现有的小块，打environ,unsortedbin前面的，分配出来泄露libc，然后用fd指针泄露堆地址，然后bydglibc2.35对fd指针进行了加密，还要解密，12位12位异或回去去泄露heap基地址，libc里面拿到environ之后泄露栈地址，劫持用堆任意分配来拿分配栈地址，从而劫持返回地址，卡就卡在，他用exit退出的，不通过return 0返回，导致我没法拿到劫持返回地址，最后做出来是突然发现可以劫持read函数的返回地址，从而执行rop。还有，这玩意fd为什么是5啊，真恶心
 exp如下
 ```python
