@@ -27,6 +27,7 @@ nav:
  - 学业笔记: note.md
  - new_star_ctf: new_star_writeup.md
  - CSA培训: ctf_notebook.md
+ - ZJUCTF2025: ZJUCTF2025.md
 markdown_extensions:
   # - meta # Sponsors only
   - toc:
