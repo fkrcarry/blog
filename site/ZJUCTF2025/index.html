@@ -2137,8 +2137,8 @@ jadx-jui打开长这样，是个关于时间做seed，然后用seed生成随机�
 CPU pwn，笑死了最有意思的一集。
 看了一大堆，刚开始不知道做什么，仔细读发现是要去一片被保护的区域里面读内存，虽然我本地上跑他一直是特权态，一直都能读出来，随后发现远程上不行。随后思路就是如何进入特权态，想的办法就是ecall，但是ecall会卡死，仔细看波形图发现他ecall会跳入stvec，但是stvec的值是0，然后从0再跑回shellcode，然后再执行shellcode里面的ecall，导致卡死，但是想要劫持stvec又要csrw，这个有要求要特权态，这不就死循环了吗，后面就像如何在不执行ecall下进入特权态，仔细看代码发现branch_taken的优先级大于ecall，也就是flush优先级更高，而且flush不会清空next_privilege，导致如果我们b型后面加一条ecall，然后b型跳走，这样可以偷到特权态，随后执行即可拿到特权态，读出flag即可
 工具有</p>
-<p><a href="https://riscvasm.lucasteske.dev/#">RV32在线汇编器</a>
-将指令转换为base64
+<p><a href="https://riscvasm.lucasteske.dev/#">RV32在线汇编器</a></p>
+<p>将指令转换为base64
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pwn</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
@@ -2241,8 +2241,8 @@ CPU pwn，笑死了最有意思的一集。
 <a id="__codelineno-15-50" name="__codelineno-15-50" href="#__codelineno-15-50"></a><span class="sd">&#39;&#39;&#39;</span>
 </code></pre></div></p>
 <h3 id="unlucky">unlucky<a class="headerlink" href="#unlucky" title="Permanent link">&para;</a></h3>
-<p><strong>一血</strong>
-就是输入seec，根据seed生成迷宫，然后迷宫走出去就可以根据我们的路径来以一定规则转换成代码并执行，也就是我们的shellcode要能过验证。思路就是我们要创建能够过验证的shellcode，最短的就是
+<p><strong>一血</strong></p>
+<p>就是输入seed，根据seed生成迷宫，然后迷宫走出去就可以根据我们的路径来以一定规则转换成代码并执行，也就是我们的shellcode要能过验证。思路就是我们要创建能够过验证的shellcode，最短的就是
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">pop</span><span class="w"> </span><span class="n">rax</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">sub</span><span class="w"> </span><span class="n">rax</span><span class="p">,</span><span class="m">1311</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">call</span><span class="w"> </span><span class="n">rax</span>

@@ -1126,6 +1126,7 @@ CPU pwn，笑死了最有意思的一集。
 工具有
 
 [RV32在线汇编器](https://riscvasm.lucasteske.dev/#)
+
 将指令转换为base64
 ```python
 import base64
@@ -1232,7 +1233,8 @@ variable:
 ```
 ### unlucky
 **一血**
-就是输入seec，根据seed生成迷宫，然后迷宫走出去就可以根据我们的路径来以一定规则转换成代码并执行，也就是我们的shellcode要能过验证。思路就是我们要创建能够过验证的shellcode，最短的就是
+
+就是输入seed，根据seed生成迷宫，然后迷宫走出去就可以根据我们的路径来以一定规则转换成代码并执行，也就是我们的shellcode要能过验证。思路就是我们要创建能够过验证的shellcode，最短的就是
 ```S
 pop rax
 sub rax,1311
