@@ -1,6 +1,9 @@
 # writeup
 
 **说在前面**
+
+![score](pic/score.png)
+
 校赛最难打的一集，68道题目，pwn也有13道，做不动了，就只做了pwn方向的一些题目，其他方向都是签到题，最后得到了个pwn方向第三，三个pwn一血一个pwn三血
 
 
@@ -1691,3 +1694,6 @@ p.interactive()
 
 ## github
 我的所有脚本以及文件全部放在[github](https://github.com/fkrcarry/ZJUCTF_writeup_and_exp)上了
+
+## 友链
+[wing3e老师的writeup](https://wing3e.github.io/2025/11/29/ZJUCTF2025/#more)
